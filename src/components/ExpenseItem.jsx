@@ -8,6 +8,7 @@ export default function ExpenseItem({ expense, onDelete }) {
       <div>
         <div className="title">{title}</div>
         <div className="meta">{category} • {d}</div>
+        {expense.notes ? <div className="notes">{expense.notes}</div> : null}
       </div>
       <div className="right">
         <div className="amount">${amount.toFixed(2)}</div>

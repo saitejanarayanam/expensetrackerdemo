@@ -5,6 +5,7 @@ export default function ExpenseForm({ onAdd }) {
   const [amount, setAmount] = useState('')
   const [date, setDate] = useState('')
   const [category, setCategory] = useState('Other')
+  const [notes, setNotes] = useState('')
 
   function submit(e) {
     e.preventDefault()
@@ -15,12 +16,14 @@ export default function ExpenseForm({ onAdd }) {
       amount: parseFloat(amount),
       date,
       category,
+      notes: notes.trim(),
     }
     onAdd(exp)
     setTitle('')
     setAmount('')
     setDate('')
     setCategory('Other')
+    setNotes('')
   }
 
   return (
@@ -41,6 +44,12 @@ export default function ExpenseForm({ onAdd }) {
         <option>Bills</option>
         <option>Other</option>
       </select>
+      <textarea
+        className="notes-input"
+        value={notes}
+        onChange={(e) => setNotes(e.target.value)}
+        placeholder="Notes (optional)"
+      />
       <button type="submit">Add Expense</button>
     </form>
   )
