@@ -25,7 +25,7 @@ export default function App() {
 
   return (
     <div className="app">
-      <h1>Personal Expense Tracker</h1>
+      <h1>Sai Teja's Personal Expenses Tracker</h1>
       <ExpenseForm onAdd={addExpense} />
       <ExpenseList expenses={expenses} onDelete={deleteExpense} />
     </div>
