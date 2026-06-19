@@ -1,4 +1,4 @@
-# Sai teja's Personal expenses tracker
+# Sai Teja's Personal Expenses Tracker
 
 Simple personal expense tracker built with React + Vite.
 
