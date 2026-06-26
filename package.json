@@ -9,12 +9,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "run": "^1.5.0"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^5.0.0",
+    "vercel": "^54.17.3",
     "vite": "^5.0.0"
   }
 }

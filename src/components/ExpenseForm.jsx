@@ -5,25 +5,23 @@ export default function ExpenseForm({ onAdd }) {
   const [amount, setAmount] = useState('')
   const [date, setDate] = useState('')
   const [category, setCategory] = useState('Other')
-  const [notes, setNotes] = useState('')
 
   function submit(e) {
     e.preventDefault()
     if (!title || !amount || !date) return alert('Please fill title, amount and date')
+    const id = typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : Date.now().toString()
     const exp = {
-      id: Date.now().toString(),
+      id,
       title: title.trim(),
       amount: parseFloat(amount),
       date,
       category,
-      notes: notes.trim(),
     }
     onAdd(exp)
     setTitle('')
     setAmount('')
     setDate('')
     setCategory('Other')
-    setNotes('')
   }
 
   return (
@@ -44,12 +42,7 @@ export default function ExpenseForm({ onAdd }) {
         <option>Bills</option>
         <option>Other</option>
       </select>
-      <textarea
-        className="notes-input"
-        value={notes}
-        onChange={(e) => setNotes(e.target.value)}
-        placeholder="Notes (optional)"
-      />
+      {/* notes removed */}
       <button type="submit">Add Expense</button>
     </form>
   )
