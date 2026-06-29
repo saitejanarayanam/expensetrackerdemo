@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 
 export default function ExpenseForm({ onAdd }) {
   const [title, setTitle] = useState('')
   const [amount, setAmount] = useState('')
   const [date, setDate] = useState('')
   const [category, setCategory] = useState('Other')
+  const [file, setFile] = useState(null)
+  const fileInputRef = useRef(null)
 
   function submit(e) {
     e.preventDefault()
@@ -17,11 +19,15 @@ export default function ExpenseForm({ onAdd }) {
       date,
       category,
     }
-    onAdd(exp)
+    onAdd(exp, file)
     setTitle('')
     setAmount('')
     setDate('')
     setCategory('Other')
+    setFile(null)
+    if (fileInputRef.current) {
+      fileInputRef.current.value = ''
+    }
   }
 
   return (
@@ -42,7 +48,31 @@ export default function ExpenseForm({ onAdd }) {
         <option>Bills</option>
         <option>Other</option>
       </select>
-      {/* notes removed */}
+      <div className="file-input-wrapper">
+        <label className="file-input-label">
+          <span className="icon">📎</span>
+          <span className="file-name">{file ? file.name : 'Attach Invoice'}</span>
+          <input
+            type="file"
+            ref={fileInputRef}
+            onChange={(e) => setFile(e.target.files[0] || null)}
+            accept="image/*,application/pdf"
+            style={{ display: 'none' }}
+          />
+        </label>
+        {file && (
+          <button
+            type="button"
+            className="clear-file"
+            onClick={() => {
+              setFile(null)
+              if (fileInputRef.current) fileInputRef.current.value = ''
+            }}
+          >
+            ✕
+          </button>
+        )}
+      </div>
       <button type="submit">Add Expense</button>
     </form>
   )
